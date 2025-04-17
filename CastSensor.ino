@@ -4,7 +4,7 @@
 
 int sensor = 0;
 double offset=0;
-int levelthreshholds[]={-1,7,14,21,30,40,50,65,80,95,115};
+int levelthresholds[]={-1,7,14,21,30,40,50,65,80,95,115};
 String feedback[]={"Doing well!","Nice and easy","Steady now...","Careful there!","Whoa, lighten up","Too much weight!","Uh-oh...","You're pushing it","Danger zone!","Stop! Rest foot!","STOP"};
 
 
@@ -32,8 +32,8 @@ void lcdPrintSensor(double offset){
   int level;
   char* message[16];
   boolean push=false;
-  for(int i=sizeof(levelthreshholds) / sizeof(levelthreshholds[0])-1;i>=0;i--){
-    if(sensor>levelthreshholds[i]){
+  for(int i=sizeof(levelthresholds) / sizeof(levelthresholds[0])-1;i>=0;i--){
+    if(sensor>levelthresholds[i]){
       lcd.clear();
       String firstLine="Level "+String(i+1)+": "+String(sensor);
       lcd.setCursor(0,0);
