@@ -89,15 +89,51 @@ void setup() {
     //delay(100);
     //}
 }
-
-void loop() {
+static void displayText(int weightOne,int weightTwo){
   display.clearDisplay();
+
   display.setCursor(0, 0);
-  display.println("SENDER1:");
-  display.printf("a1: %d\nb1: %d\nc1: %d\n\n", a1, b1, c1);
-  display.println("SENDER2:");
-  display.printf("a2: %d\nb2: %d\nc2: %d", a2, b2, c2);
+  display.println(String(weightOne));
+
+
+  display.setCursor(0, 20);
+  display.println("Lbs");
+
+  
+  int spacing=0;
+  if(weightTwo>99){
+    spacing=6*2*3;
+  }
+  else if(weightTwo>9){
+    spacing=6*2*2;
+  }
+  else{
+    spacing=6*2;
+  }
+  display.setCursor(display.width()-spacing, 0);
+  display.println(String(weightTwo));
+
+  display.setCursor(display.width()-36, 20);
+  display.println("Lbs");
+  
+  if(weightOne!=0){
+    int percentDifference=1;
+    if(weightOne>weightTwo){
+      percentDifference=((weightOne-weightTwo)*100/weightOne);
+    }
+    else{
+      percentDifference=((weightTwo-weightOne)*100/weightTwo);
+    }
+    int percentDifferenceSpacing=(log10(percentDifference)+1)*6;
+    display.setCursor(display.width()/2-percentDifferenceSpacing, 50);
+    display.print(percentDifference);
+    display.print("%");
+  }
   display.display();
+}
+void loop() {
+  displayText(left,right);
+  
 
   delay(500);
 }
